@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo8.mapper.BookMapper">
+
+    <!-- selectBookList --> 
+    <select id="selectBookList" resultType="com.example.demo8.dto.BookDto">
+        select * from tb_book order by b_no desc
+    </select>  
+
+    <!-- insertBook --> 
+
+    <insert id="insertBook">
+        insert into tb_book (b_no, title, author) 
+        values ('b'||lpad(seq_tb_book.nextval,5,0), #{title}, #{author})
+    </insert>
+    
+
+
+
+
+</mapper>
