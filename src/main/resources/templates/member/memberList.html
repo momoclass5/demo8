@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>사용자 목록</h2>
+
+    <!--버튼을 클릭하면 페이지를 요청-->
+    <!--경로
+        /member/bookList
+        ./ 또는 아무것도 적지않음 : 현재경로 
+        ../ : 상위경로
+        / : 루트경로
+    -->
+    <button onclick="location.href='./memberWrite'">사용자 등록</button><br>
+    <button onclick="location.href='memberWrite'">사용자 등록</button><br>
+    <!--리스트-->
+    <button onclick="location.href='/member/memberWrite'">사용자 등록</button><br>
+
+    <th:block th:unless="${#lists.isEmpty(list)}">
+        <!--#lists.isEmpty(list) : 리스트가 비어있는지 여부를 반환-->
+        리스트는 비어있지 않음!!!
+    </th:block>
+
+
+    <th:block th:if="${list != null}">
+        list is not null
+        <!--문자열로 연결 하여 값을 출력-->
+        <p th:text="'총 건수 : ' + ${list.size} + '건'"></p>
+        <table>
+            <tr>
+                <th>사번</th>
+                <th>사용자명</th>
+                <th>아이디</th>
+            </tr>
+
+            
+            <th:block th:each="item,status:${list}">
+                <th:block th:if="${status.size}>0">
+                    <!--p th:text="${status.size}"></p-->
+                </th:block>
+                <tr>
+                    <td th:text="${status.index}">사번</td>
+                    <td th:text="${item.m_no}">사번</td>
+                    <td><a th:href="@{/member/memberDetail(m_no=${item.m_no})}" 
+                            th:text="${item.name}"></a></td>
+                    <td th:text="${item.id}">아이디</td>
+                </tr>
+
+            </th:block>
+
+        </table>
+        
+    </th:block>
+
+    <th:block th:unless="${list != null}">
+        list is null
+    </th:block>
+</body>
+</html>
